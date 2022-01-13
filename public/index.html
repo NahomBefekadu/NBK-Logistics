@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBK Logistics</title>
+    <!-- normalize.css -->
+    <link rel="stylesheet" href="./normalize.css" />
+    <!-- main.css -->
+    <link rel="stylesheet" href="./logistics.css" />
+  </head>
+  <body>
+    <section class="container">
+      <section class="hero">
+        <h1>NBK Logistics</h1>
+        <span
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
+          itaque, tenetur corporis autem, recusandae maxime temporibus cum
+          incidunt atque neque odit sequi. Omnis voluptatibus dolor ducimus
+          voluptatum, maiores inventore soluta!</span
+        >
+      </section>
+
+      <section class="section_TopBar">
+        <div class="section_TopBar_left">
+          <div id="deleteprodForm">
+            <form id="formdelete" >
+              <input
+                type="number"
+                id="searchID"
+                name="searchID"
+                placeholder="Item ID"
+                required
+              />
+              <div><button type="submit" id="DeleteItm"  >Delete Item</button></div>
+            </form>
+
+          </div>
+          
+          <button type="submit" id="sr" onclick="getUser()">Refresh Table</button>
+          <button type="button" id="updtBtn" onclick="getUpdate()">Update Item</button>
+
+          <div class="form-popup" id="updateProdForms">
+            <form id="createForm2" class="form-container"
+            >
+            <input type="number" id="product_id" name="product_id2" min="1" step="1" placeholder="Enter Product ID">
+              <input type="text" placeholder="Enter Name" name="name2" id="prodname" required>
+              <input type="text" placeholder="Enter description" name="description2" id="proddescription">
+              <input type="text" placeholder="Enter sku" name="sku2" id="prodsku">
+              <label for="price"><b>Price</b></label>
+              <input type="number" id="price" name="price2" min="0" max="100" step=".01" value="30">
+              <label for="category_name"><b>Category</b></label>
+              <select name="category2" id="category_name"></select>
+              <label for="stock"><b>Stock</b></label>
+              <input type="number" id="stock" name="stock2" min="0" max="100" step="10" value="10">
+              <label for="warehouse_name"><b>Warehouse</b></label>
+              <select name="location2" id="warehouse_name"> </select>
+              <label for="supplier_name"><b>Supplier</b></label>
+              <select name="supplier2" id="supplier_name"> </select>
+              <div class="form-popup-btm">
+                <button type="submit" class="btn" id="CreateBtn2"onclick="handleForm23()" >Update</button>
+                <button id="CloseBtn2" type="button" class="btn cancel" onclick="closeForm2()">Close</button>
+              </div>
+            </form>
+
+
+
+        </div>
+      
+        </div>
+        <div class="section_TopBar_right">
+          <button type="button" id="CreateProdBtn">Create New Product</button>
+          <button type="button" id="CreateWareBtn" onclick="createWarehouse()">ADD New Warehouse</button>
+
+          <div class="form-popup" id="myForm3">
+            <form id="createForm" class="form-container"
+            >
+              <input type="text" placeholder="Enter New Warehouse Name" name="warehouse_name" id="prodname" required>
+              <div class="form-popup-btm">
+                <button type="submit" class="btn" id="CreateBtn3">Create</button>
+                <button type="button" class="btn cancel" onclick="closeForm3()">Close</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="form-popup" id="myForm">
+            <form id="createForm" class="form-container"
+            >
+              <input type="text" placeholder="Enter Name" name="name" id="prodname" required>
+              <input type="text" placeholder="Enter description" name="description" id="proddescription">
+              <input type="text" placeholder="Enter sku" name="sku" id="prodsku">
+              <label for="price"><b>Price</b></label>
+              <input type="number" id="price" name="price" min="0" max="100" step=".01" value="30">
+              <label for="category_name"><b>Category</b></label>
+              <select name="category" id="category_name1"></select>
+              <label for="stock"><b>Stock</b></label>
+              <input type="number" id="stock" name="stock" min="0" max="100" step="10" value="10">
+              <label for="warehouse_name"><b>Warehouse</b></label>
+              <select name="location" id="warehouse_name1"> </select>
+              <label for="supplier_name"><b>Supplier</b></label>
+              <select name="supplier" id="supplier_name1"> </select>
+              <div class="form-popup-btm">
+                <button type="submit" class="btn" id="CreateBtn">Create</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="Table">
+        <div class="tbl-header">
+          <table >
+            <thead>
+              <tr>
+                <th style="width: 112px">ID</th >
+                <th style="width: 112px">name</th>
+                <th style="width: 112px">description</th>
+                <th style="width: 112px">sku</th>
+                <th style="width: 112px">price</th>
+                <th style="width: 112px">SKU</th>
+                <th style="width: 112px">Category</th>
+                <th style="width: 112px">stock</th>
+                <th style="width: 112px">location</th>
+                <th style="width: 112px">supplier</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table >
+            <tbody id="productBody">
+            </tbody>
+          </table>
+        </div>
+    </section>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./logistics.js"></script>
+  </body>
+</html>
