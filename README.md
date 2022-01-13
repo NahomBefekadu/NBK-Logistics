@@ -26,8 +26,9 @@ Node populateDatabase.js
 
 #### Run the project
 
-Once everything has been set up you can then run the project using the command shown below to start the server. Once you have the server running, use your favorite command API testing tool to test the endpoints or go over to [Postman](https://www.postman.com/ "Postman's Homepage") and access the api using `http://localhost:<your-port>`.
+Once everything has been set up you can then run the project using the command shown below to start the server. Once you have the server running, headover to your browser and put `http://localhost:<your-port>` to go to the webpage.
 
+you can also use your favorite command API testing tool to test the endpoints or go over to [Postman](https://www.postman.com/ "Postman's Homepage") and access the api using `http://localhost:<your-port>`.
 You can follow the format of `http://localhost:<your-port>/users` when testing the API endpoints.
 
 ```bash
