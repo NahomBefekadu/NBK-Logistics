@@ -1,6 +1,7 @@
 const db = require("../db");
 const { StatusCodes } = require("http-status-codes");
-//get Section
+
+//get all data from category table
 const getCategories = async (req, res) => {
   const statement = `SELECT * FROM category;`;
   const values = [];

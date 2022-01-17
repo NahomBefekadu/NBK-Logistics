@@ -1,10 +1,19 @@
-const tableBody = document.getElementById("productBody");
+/*
+Set Table data on window load.
+ *@author Nahom
+ */
 window.onload = function () {
-  getUser();
+  getTable();
 };
 
-async function getUser() {
-  console.log("heyy");
+/*
+Function retrieves data from database, and attaches data to appropriate table elements
+ *@author Nahom
+ *@async function
+ *@return   {object} Table Data
+ */
+const tableBody = document.getElementById("productBody");
+async function getTable() {
   try {
     const response = await axios.get("http://localhost:5000/api/v1/product");
     console.log(response.data);
@@ -44,18 +53,22 @@ async function getUser() {
   }
 }
 
+// open and close forms
 const closeForm = function () {
   document.getElementById("myForm").style.display = "none";
 };
-
 document.getElementById("CreateProdBtn").addEventListener("click", function () {
   document.getElementById("myForm").style.display = "block";
 });
 
-//Forms Selector update Section---------------------------------------------------------//
+//Forms Selector Section//
 
-//Fill Category Selector----------------//
-//create form
+/*
+  Retrieves categories data from database and fills form selector
+ *@author Nahom
+ *@async function
+ *@event Click - Create New Product Button
+ */
 const categories = document.getElementById("category_name1");
 document
   .getElementById("CreateProdBtn")
@@ -72,7 +85,12 @@ document
       console.log(error);
     }
   });
-//update form
+/*
+  Retrieves categories data from database and fills form selector 
+ *@author Nahom
+ *@async function
+ *@event Click - Update Item Button
+ */
 const categories2 = document.getElementById("category_name");
 document.getElementById("updtBtn").addEventListener("click", async function () {
   try {
@@ -87,7 +105,12 @@ document.getElementById("updtBtn").addEventListener("click", async function () {
     console.log(error);
   }
 });
-//Fill warehouse Selector---------------------------//
+/*
+  Retrieves warehouse data from database and fills form selector 
+ *@author Nahom
+ *@async function
+ *@event Click - Create New Product Button
+ */
 //create form
 const warehouse = document.getElementById("warehouse_name1");
 document
@@ -107,7 +130,12 @@ document
       console.log(error);
     }
   });
-//update form
+/*
+  Retrieves warehouse data from database and fills form selector 
+ *@author Nahom
+ *@async function
+ *@event Click - Update Item Button
+ */
 const warehouse2 = document.getElementById("warehouse_name");
 document.getElementById("updtBtn").addEventListener("click", async function () {
   try {
@@ -122,8 +150,13 @@ document.getElementById("updtBtn").addEventListener("click", async function () {
     console.log(error);
   }
 });
-//Fill supplier Selector-------------------------------//
-//create form
+
+/*
+  Retrieves supplier data from database and fills form selector 
+ *@author Nahom
+ *@async function
+ *@event Click - Create New Product Button
+ */
 const supplier = document.getElementById("supplier_name1");
 document
   .getElementById("CreateProdBtn")
@@ -140,7 +173,12 @@ document
       console.log(error);
     }
   });
-//update form
+/*
+  Retrieves supplier data from database and fills form selector 
+ *@author Nahom
+ *@async function
+ *@event Click - Update Item Button
+ */
 const supplier2 = document.getElementById("supplier_name");
 document.getElementById("updtBtn").addEventListener("click", async function () {
   try {
@@ -155,9 +193,15 @@ document.getElementById("updtBtn").addEventListener("click", async function () {
     console.log(error);
   }
 });
-// Forms Section & Routes-------------------------------------------------------------------//
+// Forms Section & Routes //
 
-//Create Product in backend------------------------------//
+/*
+  Takes in formdata object and converts the object to a json string
+ *@author Nahom
+ *@param {object}formdata - form key/value pairs data from user submission
+ *@event Click - Update Item Button
+ *@return {String} - product JSON string
+ */
 function ConvertFormToJson(formData) {
   let obj = {};
   for (let key of formData.keys()) {
@@ -165,24 +209,32 @@ function ConvertFormToJson(formData) {
   }
   return JSON.stringify(obj);
 }
-//var Form = document.getElementById("myForm");
-
+// Product //
+//listen for submit event
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("myForm").addEventListener("submit", handleForm);
 });
+/*
+  Takes in submit event and creates product in backend
+ *@author Nahom
+ *@async function
+ *@param {object}submit event data
+ *@event Click - create
+ */
 async function handleForm(ev) {
   ev.preventDefault(); //stop the page reloading
-  //console.dir(ev.target);
   let myForm = ev.target;
   let fd = new FormData(myForm);
+  /*   
   for (let key of fd.keys()) {
-    // console.log(key, fd.get(key));
-  }
+    console.log(key, fd.get(key));
+  } 
+  */
   let json = ConvertFormToJson(fd);
-  let objJson = JSON.parse(json);
-  let prodID = objJson(product_id2);
+  //let objJson = JSON.parse(json);
+  //let prodID = objJson(product_id2);
   console.log(JSON.parse(json));
-  console.log(prodID);
+  //console.log(prodID);
   //console.log(json);
   try {
     await axios.post("http://localhost:5000/api/v1/product", json, {
@@ -201,22 +253,16 @@ document
   .getElementById("CreateBtn")
   .addEventListener("click", async function () {
     document.getElementById("createForm").reset();
-    getUser();
+    getTable();
   });
 
-//update Product in backend-------------------------------//
 /*
-document.getElementById("updtBtn").addEventListener("click", function () {
-  document.getElementById("myForm2").style.display = "block";
-});
-*/
-const getUpdate = function () {
-  document.getElementById("updateProdForms").style.display = "block";
-};
-const closeForm2 = function () {
-  document.getElementById("updateProdForms").style.display = "none";
-};
-
+  Takes in submit event and updates product in backend
+ *@author Nahom
+ *@async function
+ *@param {object}submit event data
+ *@event Click - update
+ */
 async function handleForm23(ev) {
   //ev.preventDefault(); //stop the page reloading
   //console.dir(ev.target);
@@ -242,20 +288,35 @@ async function handleForm23(ev) {
     console.log(error);
   }
 }
+
+//open and close form
+const getUpdate = function () {
+  document.getElementById("updateProdForms").style.display = "block";
+};
+const closeForm2 = function () {
+  document.getElementById("updateProdForms").style.display = "none";
+};
 //reset form after update button is clicked
 document
   .getElementById("CreateBtn2")
   .addEventListener("click", async function () {
     document.getElementById("createForm2").reset();
-    getUser();
+    getTable();
   });
 
-//delete Product in backend--------------------------------//
+//listen for submit event
 document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("deleteprodForm")
     .addEventListener("submit", handleForm3);
 });
+/*
+  Takes in submit event and deletes product in backend
+ *@author Nahom
+ *@async function
+ *@param {object}submit event data
+ *@event Click - Delete Item
+ */
 async function handleForm3(ev) {
   ev.preventDefault();
   let urlID;
@@ -267,7 +328,7 @@ async function handleForm3(ev) {
   let axiosURL = `http://localhost:5000/api/v1/product`;
   let deleteId = parseInt(urlID);
   try {
-    const res = await axios.delete(axiosURL, {
+    await axios.delete(axiosURL, {
       params: { product_id: deleteId },
     });
     window.location.reload();
@@ -276,27 +337,29 @@ async function handleForm3(ev) {
   }
 }
 
-//create warehouse in backend-----------------------------//
-const createWarehouse = function () {
-  document.getElementById("myForm3").style.display = "block";
-};
-const closeForm3 = function () {
-  document.getElementById("myForm3").style.display = "none";
-};
+// warehouse //
 
+//listen for submission of form
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("myForm3").addEventListener("submit", handleForm4);
 });
+/*
+  Takes in submit event and creates warehouse in backend
+ *@author Nahom
+ *@async function
+ *@param {object}submit event data
+ *@event Click - create
+ */
 async function handleForm4(ev) {
   ev.preventDefault(); //stop the page reloading
-  //console.dir(ev.target);
   let myForm = ev.target;
   let fd = new FormData(myForm);
-  for (let key of fd.keys()) {
-    //console.log(key, fd.get(key));
-  }
+  /*  
+ for (let key of fd.keys()) {
+    console.log(key, fd.get(key));
+  } 
+  */
   let json = ConvertFormToJson(fd);
-  //console.log(json);
   try {
     await axios.post("http://localhost:5000/api/v1/warehouse", json, {
       headers: {
@@ -308,3 +371,11 @@ async function handleForm4(ev) {
     console.log(error);
   }
 }
+
+// open and close form
+const createWarehouse = function () {
+  document.getElementById("myForm3").style.display = "block";
+};
+const closeForm3 = function () {
+  document.getElementById("myForm3").style.display = "none";
+};

@@ -1,6 +1,10 @@
 # Logistics Company Inc (Back-end Platform)
+
 <img src="https://raw.githubusercontent.com/NahomBefekadu/NBK-Logistics/master/public/images/logistics.png">
+
 This is a Back-end for logistics company to track inventory, with the functionality CRUD operations on Products and creation of new locations for warehouses.
+
+If you don't see the product you created refresh the page.
 
 ## Project Setup
 
@@ -35,9 +39,8 @@ You can follow the format of `http://localhost:<your-port>/users` when testing t
 npm start
 ```
 
-### Future Improvements
-- [ ] Add User
+### Outstanding Requirements/ Future Improvements
+
 - [ ] User Validation
 - [ ] Security Check
 - [ ] User Security
-- [ ] Filter Functionality
